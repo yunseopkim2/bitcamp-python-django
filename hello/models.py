@@ -80,6 +80,27 @@ class Quiz04GradeAuto(object):
 def myRandom(start, end):
     return random.randint(start, end)
 
+
+class Quiz04AutoGrade:
+
+    def __init__(self, name, kor, eng, math):
+        self.name = name
+        self.kor = kor
+        self.eng = eng
+        self.math = math
+
+    def total(self):
+        return self.kor + self.eng + self.math
+
+    def avg(self):
+        return (self.kor + self.eng + self.math) / 3
+
+    def chkPass(self):
+        if self.avg() >= 60:
+            return f'합격'
+        else:
+            return f'불합격'
+
 class Quiz05Dice(object):
     @staticmethod
     def cast():
@@ -114,7 +135,7 @@ class Quiz08Rps(object):
         p = self.player
         # 1 가위 2  바위 3 보
         rps = ['가위', '바위', '보']
-        if p == 1:
+        ''' if p == 1:
             if c == 1:
                 res = f'플레이어:{rps[0]}, 컴퓨터:{rps[0]}, 결과: 무승부'
             elif c == 2:
@@ -137,9 +158,18 @@ class Quiz08Rps(object):
                 res = f'플레이어:{rps[2]}, 컴퓨터:{rps[2]}, 결과: 무승부'
         else:
             res = '1~3 입력'
-
-
+        return res'''
+        if p == c:
+            res = f'플레이어:{rps[p - 1]}, 컴퓨터:{rps[c - 1]}, 결과:무승부'
+        elif p - c == 1 or p - c == -2:
+            res = f'플레이어:{rps[p - 1]}, 컴퓨터:{rps[c - 1]}, 결과:승리'
+        elif p - c == -1 or p - c == 2:
+            res = f'플레이어:{rps[p - 1]}, 컴퓨터:{rps[c - 1]}, 결과:패배'
+        else:
+            res = '1~3 입력'
         return res
+
+            
 
 class Quiz09GetPrime(object):
     def __init__(self):
@@ -151,8 +181,8 @@ class Quiz11NumberGolf(object):
     def __init__(self):
         pass
 class Quiz12Lotto(object):
-    def __init__(self):
-        pass
+
+
 class Quiz13Bank(object): # 이름, 입금, 출금만 구현
     def __init__(self):
         pass
