@@ -1,4 +1,4 @@
-import random
+'''import random
 
 class Quiz01Calculator:
     def __init__(self, num1, opcode, num2):
@@ -135,7 +135,7 @@ class Quiz08Rps(object):
         p = self.player
         # 1 가위 2  바위 3 보
         rps = ['가위', '바위', '보']
-        ''' if p == 1:
+         if p == 1:
             if c == 1:
                 res = f'플레이어:{rps[0]}, 컴퓨터:{rps[0]}, 결과: 무승부'
             elif c == 2:
@@ -158,7 +158,7 @@ class Quiz08Rps(object):
                 res = f'플레이어:{rps[2]}, 컴퓨터:{rps[2]}, 결과: 무승부'
         else:
             res = '1~3 입력'
-        return res'''
+        return res
         if p == c:
             res = f'플레이어:{rps[p - 1]}, 컴퓨터:{rps[c - 1]}, 결과:무승부'
         elif p - c == 1 or p - c == -2:
@@ -189,4 +189,4 @@ class Quiz13Bank(object): # 이름, 입금, 출금만 구현
 class Quiz14Gugudan(object): # 책받침구구단
     def __init__(self):
         pass
-
+'''
