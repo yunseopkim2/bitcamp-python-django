@@ -1,12 +1,30 @@
+import random
+
 from hello import Member
-from hello.domains import my100, myRandom
+from hello.domains import my100, myRandom, members
 
 
 class Quiz00:
-    def quiz00calculator(self)-> float:
+    def quiz00calculator(self) -> float:
+
         a = my100()
         b = my100()
-        return self.add(a, b)
+        o = ['+', '-', '*', '/', '%']
+        # lise : indexing
+        res = o[myRandom(0, 5)]
+
+        if res == '+':
+            result = self.add(a, b)
+        elif res == '-':
+            result = self.sub(a, b)
+        elif res == '*':
+            result = self.mul(a, b)
+        elif res == '/':
+            result = self.div(a, b)
+        elif res == '%':
+            result = self.mod(a, b)
+
+        return print(f'{a} {res} {b} = {result}')
 
     def add(self, a, b) -> float:
         return a + b
@@ -83,6 +101,16 @@ class Quiz00:
         print(res)
 
     def quiz04leap(self):
+        y = myRandom(2000, 2022)
+        '''
+        s1 = '윤년' if y % 4 == 0 and y %100 != 0 else '평년'
+        s2 = '윤년' if y % 400 == 0 else '평년'
+        Java = 
+        String s;
+        (if y % 4 == 0 && y % 100 != 0 ) ? "윤년" : (y % 400 == 0) ? "윤년" : "평년" ;
+        '''
+        s = '윤년' if y % 4 == 0 and y % 100 != 0 or y % 400 == 0 else "평년"
+        print(f'{y}년은 {s}니다.')
         pass
 
     def quiz05grade(self):
@@ -108,18 +136,82 @@ class Quiz00:
         pass
 
     def quiz06memberChoice(self):
-        members = ['홍정명', '노홍주', '전종현', '정경준', '양정오',
-                   "권혜민", "서성민", "조현국", "김한슬", "김진영",
-                   '심민혜', '권솔이', '김지혜', '하진희', '최은아',
-                   '최민서', '한성수', '김윤섭', '김승현',
-                   "강 민", "최건일", "유재혁", "김아름", "장원종"]
-        return members[myRandom(0, 23)]
+
+        return members([myRandom(0, 23)])
 
     def quiz07lotto(self):
         pass
 
     def quiz08bank(self):  # 이름, 입금, 출금만 구현
-        pass
+
+        #의존관계 형성 (메소드 안에서)a = Account()
+
+        print(f'{Account().to_string()}')
+
 
     def quiz09gugudan(self):  # 책받침구구단
+
         pass
+
+
+'''
+은행이름은 비트은행
+입급자 이름(name), 계좌번호(account_number), 금액(money) 속성값으로 계좌를 생성한다.
+계좌번호는 3자리-2자리-6자리 형태로 랜덤하게 생성된다.
+금액은 100 - 999 사이로 랜덤하게 입금된다. (단위는 만단위로 암묵적으로 판단한다) 
+'''
+
+
+class Account(object):
+    def __init__(self):
+        self.BANK_NAME = '비트은행'
+        self.name = members()[myRandom(0, 23)]
+        #self.account_number = f'{myRandom(0, 999):0>3}-{myRandom(0, 99):0>2}-{myRandom(0, 999999):0>6}'
+        self.account_number = self.creat_account_number()
+        self.money = myRandom(100, 999)
+
+    def to_string(self):
+        return f'은행: {self.BANK_NAME} \n' \
+               f'입금자: {self.name} \n' \
+               f'계좌번호: {self.account_number} \n' \
+               f'금액: {self.money}만원'
+
+    def creat_account_number(self):
+        '''
+        ls = [str(myRandom(0, 9)) for i in range(3)]
+        ls.append('-')
+        ls += [str(myRandom(0, 9)) for i in range(2)]
+        ls.append('-')
+        ls += [str(myRandom(0, 9)) for i in range(6)]
+        return ''.join(ls) '''
+
+        #return ''.join([str(myRandom(0, 9)) if i != 3 and i != 6 else '-' for i in range(13)])
+
+        return  ''.join(['-' if i == 3 or i == 6 else str(myRandom(0, 9)) for i in range(13)])
+
+
+    def main(self):
+        ls = []
+        while 1 :
+            menu = input('0.exit 1.계좌개설 2. 계좌목록 3.입급 4.출금 5.계좌해지')
+            if menu == '0' :
+                break
+            if menu == '1' :
+                ls.append(Account())
+            elif menu == '2' :
+                pass
+            elif menu == '3' :
+                account_number = input('입금할 계좌번호')
+                deposit = input('입급액')
+                # 추가 코드 생성
+            elif menu == '4' :
+                account_number = input('출금할 계좌번호')
+                money = input('출금액')
+                # 추가 코드 생성
+            elif menu == '5' :
+                account_number = input('탈퇴할 계좌번호')
+            else:
+                print('Wrong Number.. Try Again')
+                continue
+
+
