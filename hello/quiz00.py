@@ -171,12 +171,13 @@ class Account(object):
         self.money = myRandom(100, 999) if money == None else money
 
     def to_string(self):
-        return f'은행: {self.BANK_NAME} \n' \
-               f'입금자: {self.name} \n' \
-               f'계좌번호: {self.account_number} \n' \
+        return f'은행: {self.BANK_NAME} ' \
+               f'입금자: {self.name} ' \
+               f'계좌번호: {self.account_number} ' \
                f'금액: {int(self.money)}만원'
 
-    def creat_account_number(self):
+    @staticmethod
+    def creat_account_number():
         '''
         ls = [str(myRandom(0, 9)) for i in range(3)]
         ls.append('-')
@@ -189,17 +190,48 @@ class Account(object):
 
         return  ''.join(['-' if i == 3 or i == 6 else str(myRandom(0, 9)) for i in range(13)])
 
-    def del_account(self, ls, account_number):
+    @staticmethod
+    def find_account(ls, account_number):
+
+       # return ''.join([ j.to_string() if j.account_number == account_number else '찾는 계좌 아님' for i, j in enumerate(ls)])
+
+       ''' for i, j in enumerate(ls):
+            if j.account_number == account_number:
+                 print(j.to_string()) '''
+
+       for i, j in enumerate(ls):
+           if j.account_number == account_number:
+               a = ls[i]
+
+       return a
+
+    @staticmethod
+    def del_account(ls, account_number):
         for i, j in enumerate(ls):
             if j.account_number == account_number:
                 del ls[i]
+
+    @staticmethod
+    def add_account(ls, account_number, add):
+
+        for i, j in enumerate(ls):
+            if j.account_number == account_number:
+                ls[i].money += int(add)
+                return ls[i]
+
+    @staticmethod
+    def withdraw_account(ls, account_number, withdraw):
+        for i, j in enumerate(ls):
+            if j.account_number == account_number:
+                ls[i].money -= int(withdraw)
+                return ls[i]
 
     @staticmethod
     def main():
 
         ls = []
         while 1 :
-            menu = input('0.exit 1.계좌개설 2. 계좌목록 3.입급 4.출금 5.계좌해지')
+            menu = input('0.exit 1.계좌개설 2. 계좌목록 3.입급 4.출금 5.계좌해지 6.계좌조회')
             if menu == '0':
                 break
             if menu == '1':
@@ -213,17 +245,25 @@ class Account(object):
                 print(a)
 
             elif menu == '3':
-                account_number = input('입금할 계좌번호')
+                a = Account.add_account(ls, input('입금할 계좌번호 입력'), input('입금액'))
+                print(a.to_string())
+
+                '''account_number = input('입금할 계좌번호')
                 deposit = input('입급액')
                 for i, j in enumerate(ls):
                     if j.account_number == account_number:
-                        pass
+                        pass'''
             elif menu == '4':
-                account_number = input('출금할 계좌번호')
-                money = input('출금액')
-                # 추가 코드 생성
+
+                a = Account.withdraw_account(ls, input('출금할 계좌번호'), input('출금액'))
+                print(a.to_string())
+
             elif menu == '5':
-                account_number = input('탈퇴할 계좌번호')
+                Account.del_account(ls, input('탈퇴할 계좌번호'))
+
+            elif menu == '6':
+                print(Account.find_account(ls, input('조회할 계좌번호')))
+
             else:
                 print('Wrong Number.. Try Again')
                 continue
