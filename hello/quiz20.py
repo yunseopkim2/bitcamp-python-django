@@ -43,7 +43,7 @@ class Quiz20:
     def quiz27melon(self) -> str:
         headers = {'User-Agent': 'Mozilla/5.0'}
         url = 'https://www.melon.com/chart/index.htm?dayTime=2022030816'
-        req = urllib.request.Request(url, headers = headers)
+        req = urllib.request.Request(url, headers=headers)
         soup = BeautifulSoup(urlopen(req).read(), 'lxml')
         music = soup.find_all('div', {"class": "ellipsis rank01"})
         music = ([i.get_text() for i in music])

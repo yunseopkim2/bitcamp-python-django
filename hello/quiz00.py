@@ -140,6 +140,9 @@ class Quiz00:
         return members([myRandom(0, 23)])
 
     def quiz07lotto(self):
+
+        numbers = ','.join(str(random.randint(1, 45)) for i in range(6))
+        print(numbers)
         pass
 
     def quiz08bank(self):  # 이름, 입금, 출금만 구현
