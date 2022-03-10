@@ -57,14 +57,14 @@ class Quiz20:
             dict[ls1[i]] = ls2[i]
         print(dict)
 
-
     def find_rang(self, soup) -> None:
         for i, j in enumerate(['artist', 'title']):
             for i, j in self.find_music(soup, j):
                 print(f'{i}위 : {j}')
             print('*'*100)
 
-    def print_music_list(self, soup)-> None:
+    @staticmethod
+    def print_music_list(soup)-> None:
         # print(soup.prettify())
         artists = soup.find_all('p', {"class": "artist"})
         # print(type(artists)) # <class 'b24.element.ResultSet'>
@@ -74,12 +74,12 @@ class Quiz20:
         title = soup.find_all('p', {"class": "title"})
         title = ([j.get_text() for j in title])
         print(''.join(j for j in title))
+
     @staticmethod
     def find_music(soup, cls_name) -> []:
         ls = soup.find_all('p', {'class': cls_name})
         return [j.get_text() for j in ls]
         #print(''.join(j for j in a))
-
 
     def quiz25dictcom(self) -> str: return None
 
@@ -90,11 +90,20 @@ class Quiz20:
         url = 'https://www.melon.com/chart/index.htm?dayTime=2022030816'
         req = urllib.request.Request(url, headers=headers)
         soup = BeautifulSoup(urlopen(req).read(), 'lxml')
-        music = soup.find_all('div', {"class": "ellipsis rank01"})
-        music = ([i.get_text() for i in music])
-        print(''.join(i for i in music))
+        ls1 = self.find(soup, 'ellipsis rank01')
+        ls2 = self.find(soup, 'ellipsis rank02')
+        dict = {}
+        for i, j in zip(ls1, ls2):
+            dict[i] = j
+        print(dict)
+        return dict
 
-        return None
+
+    @staticmethod
+    def find(soup, cls_name) -> []:
+
+        ls = soup.find_all('div', {"class": cls_name})
+        return [i.get_text() for i in ls]
 
     def quiz28dataframe(self) -> None:
         dict = self.quiz24zip()
@@ -103,6 +112,11 @@ class Quiz20:
         df.to_csv('./save/bugs.csv', sep=',', na_rep='NaN')
 
 
-    def quiz29(self) -> str: return None
+    def quiz29dataframe(self) -> None:
+
+        dict = self.quiz27melon()
+        df = pd.DataFrame.from_dict(dict, orient='index')
+        print(df)
+        df.to_csv('./save/melon.csv', sep=',', na_rep='NaN')
 
 
