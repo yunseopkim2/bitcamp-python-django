@@ -166,7 +166,7 @@ class Quiz00:
 
 
 class Account(object):
-    def __init__(self , name, account_number, money):
+    def __init__(self, name, account_number, money):
         self.BANK_NAME = '비트은행'
         self.name = members()[myRandom(0, 23)] if name == None else name
         #self.account_number = f'{myRandom(0, 999):0>3}-{myRandom(0, 99):0>2}-{myRandom(0, 999999):0>6}'
