@@ -41,27 +41,31 @@ class Quiz00:
     def mod(self, a, b) -> float:
         return a % b
 
-    def quiz01bmi(self):
+    def quiz01bmi(member):
         this = Member()
-        this.name = '홍길동'
-        this.height = 170.8
-        this.weight = 120.8
-        res = this.weight / (this.height * this.height) * 10000
-        if res > 25:
-            return f'비만'
-        elif res > 23:
-            return f'과체중'
-        elif res > 18.5:
-            return f'정상'
+        this.name = members()[myRandom(0, 23)]
+        this.height = myRandom(150, 190)
+        this.weight = myRandom(40, 100)
+        bmi = this.weight / (this.height * this.height) * 10000
+        if bmi >= 30:
+            res = '고도비만'
+        elif bmi > 25:
+            res = '비만'
+        elif bmi > 23:
+            res = '과체중'
+        elif bmi > 18.5:
+            res = '정상'
         else:
-            return f'저체중'
-
+            res = '저체중'
+        print(f'{this.name} 키:{this.height}cm 몸무게:{this.weight}kg BMI결과:{res}')
+        return None
     def quiz02dice(self):
-        return myRandom(1, 6)
+        print(myRandom(1, 6))
+        return None
 
     def quiz03rps(self):
         c = myRandom(1, 3)
-        p = input('가위', '바위', '보')
+        p = myRandom(1, 3)
         # 1 가위 2  바위 3 보
         rps = ['가위', '바위', '보']
         print(' ----------- 1 ------------')
@@ -86,9 +90,7 @@ class Quiz00:
                 res = f'플레이어:{rps[2]}, 컴퓨터:{rps[1]}, 결과: 승리'
             elif c == 3:
                 res = f'플레이어:{rps[2]}, 컴퓨터:{rps[2]}, 결과: 무승부'
-        else:
-            res = '1~3 입력'
-        print(res)
+        print(f'플레이어는 {rps[p - 1]} 컴퓨터는 {rps[c - 1]} 결과는 {res}')
         print(' ----------- 2 ------------')
         if p == c:
             res = f'플레이어:{rps[p - 1]}, 컴퓨터:{rps[c - 1]}, 결과:무승부'
@@ -114,30 +116,49 @@ class Quiz00:
         pass
 
     def quiz05grade(self):
-        kor = myRandom(0,100)
+        name = members()[myRandom(0, 23)]
+        kor = myRandom(0, 100)
         eng = myRandom(0, 100)
         math = myRandom(0, 100)
         sum = self.sum(kor, eng, math)
-        avg = self.agv(kor, eng, math)
-        grade = self.getGrade()
-        passChk = self.passChk()
-        return [sum, avg, grade, passChk]
+        avg = self.avg(kor, eng, math)
+        grade = self.grade(kor, eng, math)
+        passChk = self.passChk(kor, eng, math)
+        print(f'이름:{name} \n'
+              f'국어:{kor}점 영어:{eng}점 수학:{math}점 \n'
+              f'총점:{sum}점 \n'
+              f'평균:{avg}점 \n'
+              f'등급:{grade} \n'
+              f'합/불:{passChk}')
+        return None
 
-    def sum(self):
-        return self.kor + self.eng + self.math
+    def sum(self, kor, eng, math):
+        return kor + eng + math
 
-    def avg(self):
-        return self.kor + self.eng + self.math / 3
+    def avg(self, kor, eng, math):
+        return (kor + eng + math) / 3
 
-    def grade(self):
-        pass
+    def grade(self, kor, eng, math):
+        if (self.avg(kor, eng, math)) >= 90:
+            return 'A등급'
+        elif (self.avg(kor, eng, math)) >=80:
+            return 'B등급'
+        elif (self.avg(kor, eng, math)) >=70:
+            return 'C등급'
+        elif (self.avg(kor, eng, math)) >=60:
+            return 'D등급'
+        else:
+            return 'F등급'
 
-    def passChk(self):  # 60점이상이면 합격
-        pass
+    def passChk(self,kor,eng,math):  # 60점이상이면 합격
+        if (self.avg(kor,eng,math)) >= 60:
+            return '합격'
+        else:
+            return '불합격'
 
     @staticmethod
-    def quiz06memberChoice():
-
+    def quiz06member_Choice():
+        print(members()[myRandom(0, 23)])
         return members()[myRandom(0, 23)]
 
     def quiz07lotto(self):

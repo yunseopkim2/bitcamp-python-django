@@ -37,6 +37,11 @@ class Quiz20:
         soup = BeautifulSoup(html_doc.read(), 'lxml')  # html.parser vs lxml
         ls1 = self.find_music(soup, 'title')
         ls2 = self.find_music(soup, 'artist')
+        a = [i if i == 0 or i == 0 else i for i in range(1)]
+        b = [i if i == 0 or i == 0 else i for i in []]
+        c = [(i, j) for i, j in enumerate([])]
+        d = {i: j for i, j in zip(ls1, ls2)}
+        l = [i + j for i, j in zip(ls1, ls2)]
         # self.dict1(ls1, ls2)
         # self.dict2(ls1, ls2)
         # dt = {i: j for i, j in zip(ls1, ls2)}
@@ -95,16 +100,17 @@ class Quiz20:
         #print(''.join(j for j in a))
 
     @staticmethod
-    def quiz25dictcom() -> None:
+    def quiz25dictcom() -> {}:
         a = Quiz00
-        students = set([a.quiz06memberChoice() for i in range(5)])
-        scores = ([myRandom(0, 100) for i in range(5)])
+        students = set([a.quiz06member_Choice() for i in range(5)])
+        scores = [myRandom(0, 100) for i in range(5)]
         while len(students) < 5:
-            students.add(a.quiz06memberChoice())
-        res = dict(zip(students, scores))
-        print(res)
+            students.add(a.quiz06member_Choice())
+        student = list(students)
+        res = dict(zip(student, scores))
+        print({i : j for i, j in zip(student, scores)})
 
-        return None
+        return {i : j for i, j in zip(student, scores)}
 
     def quiz26map(self) -> None: return None
 
