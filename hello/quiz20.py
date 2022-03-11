@@ -3,6 +3,8 @@ import urllib.request
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import pandas as pd
+from hello.domains import my100, myRandom, members
+from quiz00 import Quiz00
 
 
 class Quiz20:
@@ -37,12 +39,23 @@ class Quiz20:
         ls2 = self.find_music(soup, 'artist')
         # self.dict1(ls1, ls2)
         # self.dict2(ls1, ls2)
+        # dt = {i: j for i, j in zip(ls1, ls2)}
+        l = [i + j for i, j in zip(ls1, ls2)]
+        l2 = dict(zip(ls1, ls2))
+        d1 = dict(zip(ls1, ls2))
+        print(d1)
+        return d1
+        # self.dict1(ls1, ls2)
+        # self.dict2(ls1, ls2)
+        # self.dict3(ls1, ls2)
+
+    @staticmethod
+    def dict3(ls1, ls2)-> None:
         dict = {}
         for i, j in zip(ls1, ls2):
-
             dict[i] = j
         print(dict)
-        return dict
+
     @staticmethod
     def dict2(ls1, ls2) -> None:
         dict = {}
@@ -81,9 +94,19 @@ class Quiz20:
         return [j.get_text() for j in ls]
         #print(''.join(j for j in a))
 
-    def quiz25dictcom(self) -> str: return None
+    @staticmethod
+    def quiz25dictcom() -> None:
+        a = Quiz00
+        students = set([a.quiz06memberChoice() for i in range(5)])
+        scores = ([myRandom(0, 100) for i in range(5)])
+        while len(students) < 5:
+            students.add(a.quiz06memberChoice())
+        res = dict(zip(students, scores))
+        print(res)
 
-    def quiz26map(self) -> str: return None
+        return None
+
+    def quiz26map(self) -> None: return None
 
     def quiz27melon(self) -> str:
         headers = {'User-Agent': 'Mozilla/5.0'}
@@ -92,11 +115,9 @@ class Quiz20:
         soup = BeautifulSoup(urlopen(req).read(), 'lxml')
         ls1 = self.find(soup, 'ellipsis rank01')
         ls2 = self.find(soup, 'ellipsis rank02')
-        dict = {}
-        for i, j in zip(ls1, ls2):
-            dict[i] = j
-        print(dict)
-        return dict
+        a = dict(zip(ls1, ls2))
+        print(a)
+        return a
 
 
     @staticmethod
