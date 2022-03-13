@@ -138,9 +138,29 @@ class Quiz20:
         print(df)
         df.to_csv('./save/bugs.csv', sep=',', na_rep='NaN')
 
+    '''
+    다음 결과 출력
+        a   b   c
+    1   1   3   5
+    2   2   4   6
+    '''
+
+    def quiz29_pandas(self) -> object:
+        d1 = {'a': [1, 2], 'b': [3, 4], 'c': [5, 6]}
+        df1 = pd.DataFrame(d1, [1, 2])
+        d2 = {"1":[1, 3, 6], "2": [2, 4, 6]}
+        df2 = pd.DataFrame.from_dict(d2, orient='index', columns=['a', 'b', 'c'])
+        aa = []
+        bb = []
+        columns = [chr(i) for i in range(97,100)] # c =  ['a', 'b', 'c']
+        [aa.append(i) if i%2 ==0 else bb.append(i) for i in range(1, 7)]
+        dict = {'1': bb,'2': aa}
+        df3 = pd.DataFrame.from_dict(dict, orient= 'index', columns=columns)
+
+        print(df3)
+        return None
 
     def quiz29dataframe(self) -> None:
-
         dict = self.quiz27melon()
         df = pd.DataFrame.from_dict(dict, orient='index')
         print(df)
