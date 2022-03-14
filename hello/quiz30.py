@@ -95,7 +95,7 @@ class Quiz30:
         col = ['국어', '영어', '수학', '사회']
         grade = [self.grade(scores=4) for i in range(10)]
         id = [self.id(chr_size=5) for i in range(10)]
-        grade1 = np.random.randint(0,100 ,(10,4))
+        grade1 = np.random.randint(0, 100, (10, 4))
         dict1 = dict(zip(id, grade1))
         df1 = pd.DataFrame.from_dict(dict1, orient='index', columns=col)
         df2 = pd.DataFrame(grade1, index=id, columns=col)
@@ -104,7 +104,54 @@ class Quiz30:
 
         return None
 
-    def quiz33(self) -> str: return None
+    def quiz33_df_loc(self) -> str:
+        df = self.creatDf(keys=['a', 'b', 'c', 'd'],
+                          vals=np.random.randint(0, 100, 4),
+                          length=3)
+
+
+        # ic(df)
+        ic(df.iloc[0]) # 시리즈로 출력
+        '''
+        ic| df.iloc[1]: a    80
+                b    49
+                c    55
+                d    84
+                Name: 1, dtype: int32
+        '''
+        ic(df.iloc[[0]]) # 데이터 프레임을로 출력
+        '''
+        ic| df.iloc[[0]]:     a  b   c   d
+                          0  18  0  48  36
+        '''
+
+        ic(df.iloc[[0,1]])
+        '''
+        ic| df.iloc[[0,1]]:     a   b   c   d
+                            0  53  11  26  61
+                            1  53  11  26  61
+        '''
+        ic(df.iloc[:3])
+        '''
+        
+        ic| df.iloc[:3]:     a   b   c   d
+                         0  46  53  77  65
+                         1  46  53  77  65
+                         2  46  53  77  65
+        '''
+        ic(df.iloc[[True, False, True]]) #빼고 싶은 줄 false
+        '''
+        ic| df.iloc[[True, False, True]]:     a   b   c   d
+                                          0  43  57  59  13
+                                          2  43  57  59  13
+        '''
+        return None
+
+
+
+    @staticmethod
+    def creatDf(keys, vals, length):
+        return pd.DataFrame([dict(zip(keys, vals)) for _ in range(length)])
 
     def quiz34(self) -> str: return None
 
