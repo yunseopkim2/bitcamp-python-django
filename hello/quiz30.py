@@ -1,3 +1,7 @@
+import random
+import string
+
+import numpy as np
 import pandas as pd
 from icecream import ic
 
@@ -50,14 +54,15 @@ class Quiz30:
     '''
 
     def quiz31_rand_2_by_3(self) -> object:
-        a=  [[myRandom(1,100)*2 for i in range(3)] for i in range(2)]
+        a=  [[myRandom(10 ,100) for i in range(3)] for i in range(2)]
+        a1=  pd.DataFrame(np.random.randint(10, 100 , size=(2,3))) # 넘파일을 사용한 매체
         '''l1 = [i for i in range(2)]
         columns = [i for i in range(3)]
         df = pd.DataFrame(a, index=l1, columns=columns)'''
         # df = pd.DataFrame({})
         # df = pd.DataFrame({}, columns={})
         # df = pd.DataFrame({}, index={}, columns={})
-        df = pd.DataFrame(a)
+        df = pd.DataFrame(a1)
         print(df)
         return None
 
@@ -78,9 +83,26 @@ class Quiz30:
                             PZOTP  94  78  79  96
                             GOJKU  62  17  75  49
     '''
+    @staticmethod
+    def id(chr_size) -> str:
+        return ''.join([random.choice(string.ascii_letters) for i in range(chr_size)])
 
+    @staticmethod
+    def grade(scores) -> []:
+        return [myRandom(0, 100) for i in range(scores)]
 
-    def quiz32(self) -> str: return None
+    def quiz32_df_grade(self) -> object:
+        col = ['국어', '영어', '수학', '사회']
+        grade = [self.grade(scores=4) for i in range(10)]
+        id = [self.id(chr_size=5) for i in range(10)]
+        grade1 = np.random.randint(0,100 ,(10,4))
+        dict1 = dict(zip(id, grade1))
+        df1 = pd.DataFrame.from_dict(dict1, orient='index', columns=col)
+        df2 = pd.DataFrame(grade1, index=id, columns=col)
+        ic(df1)
+        ic(df2)
+
+        return None
 
     def quiz33(self) -> str: return None
 
