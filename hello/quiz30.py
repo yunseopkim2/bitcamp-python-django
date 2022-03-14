@@ -1,11 +1,11 @@
 import random
 import string
-
+from titanic.models import Model
 import numpy as np
 import pandas as pd
 from icecream import ic
 
-from hello.domains import myRandom
+from hello.domains import myRandom, members
 
 
 class Quiz30:
@@ -109,42 +109,17 @@ class Quiz30:
                           vals=np.random.randint(0, 100, 4),
                           length=3)
 
+        # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html
+        col = ['자바', '파이썬', '자바스크립트', 'SQL']
+        stud = members()
+        df = pd.DataFrame(np.random.randint(0,100, (24,4)), stud, columns=col)
+        print(df)
+        df.to_csv('./save/grade.csv', sep=',', na_rep='NaN')
 
-        # ic(df)
-        ic(df.iloc[0]) # 시리즈로 출력
-        '''
-        ic| df.iloc[1]: a    80
-                b    49
-                c    55
-                d    84
-                Name: 1, dtype: int32
-        '''
-        ic(df.iloc[[0]]) # 데이터 프레임을로 출력
-        '''
-        ic| df.iloc[[0]]:     a  b   c   d
-                          0  18  0  48  36
-        '''
-
-        ic(df.iloc[[0,1]])
-        '''
-        ic| df.iloc[[0,1]]:     a   b   c   d
-                            0  53  11  26  61
-                            1  53  11  26  61
-        '''
-        ic(df.iloc[:3])
-        '''
-        
-        ic| df.iloc[:3]:     a   b   c   d
-                         0  46  53  77  65
-                         1  46  53  77  65
-                         2  46  53  77  65
-        '''
-        ic(df.iloc[[True, False, True]]) #빼고 싶은 줄 false
-        '''
-        ic| df.iloc[[True, False, True]]:     a   b   c   d
-                                          0  43  57  59  13
-                                          2  43  57  59  13
-        '''
+        # grade.csv
+        model = Model()
+        grade_df = model.new_model('grade.csv')
+        ic(grade_df)
         return None
 
 
@@ -153,7 +128,87 @@ class Quiz30:
     def creatDf(keys, vals, length):
         return pd.DataFrame([dict(zip(keys, vals)) for _ in range(length)])
 
-    def quiz34(self) -> str: return None
+    def quiz34_df_iloc(self) -> str:
+        df = self.creatDf(keys=['a', 'b', 'c', 'd'],
+                          vals=np.random.randint(0, 100, 4),
+                          length=3)
+
+
+
+        # ic(df)
+        #ic(df.iloc[0])  # 시리즈로 출력
+        '''
+        ic| df.iloc[1]: a    80
+                b    49
+                c    55
+                d    84
+                Name: 1, dtype: int32
+        '''
+       # ic(df.iloc[[0]])  # 데이터 프레임을로 출력
+        '''
+        ic| df.iloc[[0]]:     a  b   c   d
+                          0  18  0  48  36
+        '''
+
+       # ic(df.iloc[[0, 1]])
+        '''
+        ic| df.iloc[[0,1]]:     a   b   c   d
+                            0  53  11  26  61
+                            1  53  11  26  61
+        '''
+       # ic(df.iloc[:3])
+        '''
+
+        ic| df.iloc[:3]:      a   b   c   d
+                          0  46  53  77  65
+                          1  46  53  77  65
+                          2  46  53  77  65
+        '''
+       # ic(df.iloc[[True, False, True]])  # 빼고 싶은 줄 false
+        '''
+        ic| df.iloc[[True, False, True]]:      a   b   c   d
+                                           0  43  57  59  13
+                                           2  43  57  59  13
+        '''
+      #  ic(df.iloc[lambda x: x.index % 2 == 0])
+        '''
+        ic| df.iloc[lambda x: x.index % 2 == 0]:     a   b   c   d
+                                                  0  5  64  62  32
+                                                  2  5  64  62  32
+
+        '''
+       # ic(df.iloc[0, 1])
+        '''
+        ic| df.iloc[0, 1]: 84
+        '''
+       # ic(df.iloc[[0, 2], [1, 3]])
+        '''
+        ic| df.iloc[[0, 2], [1, 3]]:     b   d
+                                     0  84  83
+                                     2  84  83
+        '''
+       # ic(df.iloc[1:3, 0:3])
+        '''
+        ic| df.iloc[1:3, 0:3]:    a   b   c
+                               1  1  84  39
+                               2  1  84  39
+        '''
+       # ic(df.iloc[:, [True, False, True, False]])
+        '''
+        ic| df.iloc[:, [True, False, True, False]]:    a   c
+                                                    0  1  39
+                                                    1  1  39
+                                                    2  1  39
+        '''
+      #  ic(df.iloc[:, lambda df: [0, 2]])
+        '''
+
+        ic| df.iloc[:, lambda df: [0, 2]]:    a   c
+                                           0  1  39
+                                           1  1  39
+                                           2  1  39
+        '''
+        return None
 
     def quiz35(self) -> str: return None
 
