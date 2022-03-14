@@ -147,17 +147,37 @@ class Quiz20:
 
     def quiz29_pandas(self) -> object:
         d1 = {'a': [1, 2], 'b': [3, 4], 'c': [5, 6]}
-        df1 = pd.DataFrame(d1, [1, 2])
+        df1 = pd.DataFrame(d1, index =[1, 2])
+        print(df1)
+        '''
+        a  b  c
+    1  1  3  5
+    2  2  4  6
+        '''
         d2 = {"1":[1, 3, 6], "2": [2, 4, 6]}
-        df2 = pd.DataFrame.from_dict(d2, orient='index', columns=['a', 'b', 'c'])
-        aa = []
-        bb = []
-        columns = [chr(i) for i in range(97,100)] # c =  ['a', 'b', 'c']
-        [aa.append(i) if i%2 ==0 else bb.append(i) for i in range(1, 7)]
-        dict = {'1': bb,'2': aa}
-        df3 = pd.DataFrame.from_dict(dict, orient= 'index', columns=columns)
-
+        df2 = pd.DataFrame.from_dict(d2)
+        print(df2)
+        '''
+           1  2
+        0  1  2
+        1  3  4
+        2  6  6        
+        '''
+        df3 = pd.DataFrame.from_dict(d2, orient='index', columns=['a', 'b', 'c'])
         print(df3)
+
+        odds = []
+        evens = []
+        columns = [chr(i) for i in range(97,100)]       # c =  ['a', 'b', 'c']
+        [odds.append(i) if i%2 ==0 else evens.append(i) for i in range(1, 7)]
+        dict = {'1': evens,'2': odds}
+        df4 = pd.DataFrame.from_dict(dict, orient= 'index', columns=columns)
+        '''
+           a  b  c
+        1  1  3  5
+        2  2  4  6
+        '''
+        print(df4)
         return None
 
     def quiz29dataframe(self) -> None:

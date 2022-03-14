@@ -14,18 +14,33 @@ class Quiz30:
                4  10  11  12
        '''
 
+    ''' aa=[]
+
+            [aa.append(i) if i==3 or i==6 or i ==9 else aa.append(i)  for i in range(1,12)]
+            dict = [aa]
+            df = pd.DataFrame.(dict, index=range(1, 5), columns=['A', 'B', 'C'])
+
+            # 위 식을 리스트결합 형태로 분해해서 조립하시오
+            ic(df)
+            return None
+        '''
+
     def quiz30_df_4_by_3(self) -> object:
+        '''l1 = [range(1, 4)]
+        l2 = [range(4, 7)]
+        l3 = [range(7, 10)]
+        l4 = [range(10, 13)]'''
+        d ={'1' : range(1, 4),
+            '2': range(4, 7),
+            '3': range(7, 10),
+            '4': range(10, 13)}
+        df2 = pd.DataFrame.from_dict(d, orient='index', columns=['A', 'B', 'C'])
+        ic(df2)
 
-       ''' aa=[]
 
-        [aa.append(i) if i==3 or i==6 or i ==9 else aa.append(i)  for i in range(1,12)]
-        dict = [aa]
-        df = pd.DataFrame.(dict, index=range(1, 5), columns=['A', 'B', 'C'])
-
-        # 위 식을 리스트결합 형태로 분해해서 조립하시오
-        ic(df)
         return None
-    '''
+
+
     '''
         데이터프레임 문제 Q03.
         두자리 정수를 랜덤으로 2행 3열 데이터프레임을 생성
@@ -35,9 +50,13 @@ class Quiz30:
     '''
 
     def quiz31_rand_2_by_3(self) -> object:
-
-
-        a=  [[myRandom(1,100) for i in range(3)] for i in range(2)]
+        a=  [[myRandom(1,100)*2 for i in range(3)] for i in range(2)]
+        '''l1 = [i for i in range(2)]
+        columns = [i for i in range(3)]
+        df = pd.DataFrame(a, index=l1, columns=columns)'''
+        # df = pd.DataFrame({})
+        # df = pd.DataFrame({}, columns={})
+        # df = pd.DataFrame({}, index={}, columns={})
         df = pd.DataFrame(a)
         print(df)
         return None
