@@ -1,6 +1,6 @@
 import random
 import string
-from titanic.models import Model
+from context.models import Model
 import numpy as np
 import pandas as pd
 from icecream import ic
@@ -110,19 +110,32 @@ class Quiz30:
                           length=3)
 
         # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html
-        col = ['자바', '파이썬', '자바스크립트', 'SQL']
+        subjects = ['자바', '파이썬', '자바스크립트', 'SQL']
         stud = members()
-        df = pd.DataFrame(np.random.randint(0,100, (24,4)), stud, columns=col)
+        df = pd.DataFrame(np.random.randint(0,100, (24,4)), stud, columns=subjects)
         print(df)
         df.to_csv('./save/grade.csv', sep=',', na_rep='NaN')
-
         # grade.csv
         model = Model()
-        grade_df = model.new_model('grade.csv')
-        ic(grade_df)
+        # grade_df = model.save_model('grade.csv', dframe = df)
+        grade_df = model.new_model(fname='grade.csv')
+        print(grade_df)
+
+        print('Q1. 파이썬 점수만 출력하시오.')
+        python_scores = grade_df.loc[:, '파이썬'] #colum || 타입은 series
+        ic(type(python_scores))
+        ic(python_scores)
+
+        print('Q2. 조현국의 점수만 출력하시오.')
+        cho_scores = grade_df.loc['조현국'] #row 타입은 series indexing
+        ic(type(cho_scores))
+        ic(cho_scores)
+
+        print('Q3. 조현국의 과목별 점수만 출력하시오.')
+        cho_subjects_scores = grade_df.loc[['조현국']]  # row
+        ic(type(cho_subjects_scores)) # DataFrame으로 뽑아내기 slicing
+        ic(cho_subjects_scores)
         return None
-
-
 
     @staticmethod
     def creatDf(keys, vals, length):
