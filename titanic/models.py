@@ -26,13 +26,14 @@ class TitanicModel(object):
         df = self.fare_ratio(df)
         df = self.pclass_ordinal(df)
         df = self.embarked_nominal(df)
-        ic(df)
+        return df
 
     def drop_feature(self, df) -> object:
+        '''
         df = self.sibsp_garbage(df)
         df = self.parch_garbage(df)
         df = self.cabin_garbage(df)
-        df = self.ticket_garbage(df)
+        df = self.ticket_garbage(df)'''
         return df
 
     @staticmethod
@@ -60,30 +61,9 @@ class TitanicModel(object):
         return df
 
     @staticmethod
-    def sibsp_garbage(df) -> object:
-
-        return df
-
-    @staticmethod
-    def parch_garbage(df) -> object:
-
-        return df
-
-    @staticmethod
-    def ticket_garbage(df) -> object:
-
-        return df
-
-    @staticmethod
     def fare_ratio(df) -> object:
         return df
 
     @staticmethod
-    def cabin_garbage(df) -> object:
-
-        return df
-
-    @staticmethod
     def embarked_nominal(df) -> object:
-
         return df

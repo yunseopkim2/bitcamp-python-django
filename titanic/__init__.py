@@ -14,14 +14,14 @@ if __name__ == '__main__':
         if menu == '1':
             ic(' #### 1.전처리 #### ')
             # view.preprocess('train.csv','test.csv')
+            template = TitanicTemplate(fname='train.csv')
 
-            model = TitanicModel(train_fname='train.csv',
-                                 test_fname='test.csv')
             break
 
         elif menu == '2':
             print('### 2. 템플릿 ###')
-            template = TitanicTemplate(test_fname='test.csv', train_fname='train.csv')
+            model = TitanicModel(train_fname='train.csv',
+                                 test_fname='test.csv')
 
             break
         else:
