@@ -15,6 +15,7 @@ if __name__ == '__main__':
             ic(' #### 1.전처리 #### ')
             # view.preprocess('train.csv','test.csv')
             template = TitanicTemplate(fname='train.csv')
+            template.visualize()
 
             break
 
