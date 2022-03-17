@@ -1,5 +1,9 @@
+
+
+
 class Quiz40:
-    def quiz40(self) -> str: return None
+    def quiz40(self) -> str:
+        return None
 
     def quiz41(self) -> str: return None
 

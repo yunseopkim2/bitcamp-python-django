@@ -223,7 +223,9 @@ class Quiz30:
         '''
         return None
 
-    def quiz35(self) -> str: return None
+    def quiz35(self) -> str:
+
+        return None
 
     def quiz36(self) -> str: return None
 

@@ -32,9 +32,9 @@ class TitanicTemplate(object):
 
     def visualize(self) -> None:
         this = self.entity
-        self.draw_survived(this)
-        self.draw_pclass(this)
-        self.draw_sex(this)
+        #self.draw_survived(this)
+        #self.draw_pclass(this)
+        #self.draw_sex(this)
         self.draw_embarked(this)
 
     @staticmethod
@@ -55,7 +55,7 @@ class TitanicTemplate(object):
         this['생존결과'] = this['Survived'] \
             .replace(0, '사망자').replace(1, '생존자')
         this['Pclass'] = this['Pclass'].replace(1, '1등석').replace(2, '2등석').replace(3, '3등석')
-        sns.countplot(data=this, x='좌석등급', hue='생존결과')
+        sns.countplot(data=this)
         model = Model()
         plt.savefig(f'{model.get_sname()}draw_pclass.png')
     @staticmethod
@@ -76,7 +76,7 @@ class TitanicTemplate(object):
             .replace(0, '사망자').replace(1, '생존자')
         this['승선항구'] = this['Embarked'] \
             .replace("C", '쉘버그').replace("S", '사우스햄톤').replace("Q", '퀸즈타운')
-        sns.countplot(data=this, x='승선항구', hue='생존결과')
+        sns.countplot(data=this)
         model = Model()
         plt.savefig(f'{model.get_sname()}draw_embarked.png')
 
