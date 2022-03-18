@@ -28,6 +28,8 @@ class TitanicModel(object):
         this = self.embarked_nominal(this)
         this = self.age_ratio(this)
         this = self.drop_feature(this, 'Age')
+        this = self.fare_ratio(this)
+        this = self.drop_feature(this, 'Fare')
 
         '''
        
@@ -169,12 +171,23 @@ class TitanicModel(object):
         labels = ['Unknown', 'Baby', 'Child', 'Teenager', 'Student', 'Young Adult', 'Adult', 'Senior']
         for these in train, test:
             # pd.cut() 을 사용하시오. 다른 곳은 고치지 말고 다음 두 줄만 코딩하시오
-            these['AgeGroup'] = pd.cut(these['Age'], bins, labels=labels)  # pd.cut() 을 사용
+            these['AgeGroup'] = pd.cut(these['Age'], bins, labels=labels)  # pd.cut() 을 사용 [데이터, 구간의 갯수, 레이블명]
             these['AgeGroup'] = these['AgeGroup'].map(age_mapping)  # map() 을 사용
         return this
 
     @staticmethod
     def fare_ratio(this) -> object:
+        fare_mapping = {'4등급':1, '3등급':2, '2등급':3, '1등급': 4}
+        bins = [-1, 8, 15, 31, np.inf]
+        labels = ['4등급', '3등급', '2등급', '1등급']
+
+        this.test['Fare'] = this.test['Fare'].fillna(1)
+        this.train['Fare'] = this.train['Fare'].fillna(1)
+        for these in [this.train, this.test]:
+            these['FareBand'] = pd.cut(these['Fare'], bins, labels=labels)
+            these['FareBand'] = these['FareBand'].map(fare_mapping)
+        # print(f'qcut 으로 bins 값 설정 {this.train["FareBand"].head()}')
+
         return this
 
     @staticmethod
