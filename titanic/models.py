@@ -15,16 +15,16 @@ class TitanicModel(object):
         this.id = this.test['PassengerId']
         this.label = this.train['Survived']
         this.train = this.train.drop(['Survived'], axis=1)  # 1 = 열(세로) 0 = 행(가로)
-
         self.drop_feature(this, 'SibSp', 'Parch', 'Cabin', 'Ticket')
-
+        #self.kwargs_sample(name ='이순신')
         this = self.drop_feature(this)
+        this = self.name_nominal(this)
         '''
        
         this = self.create_label(this)
         this = self.create_train(this)
         this = self.create_label(this)
-        this = self.name_nominal(this)
+       
         this = self.sex_nominal(this)
         this = self.age_ratio(this)
         this = self.fare_ratio(this)
@@ -57,13 +57,25 @@ class TitanicModel(object):
         return this
 
     @staticmethod
-    def drop_feature(this, *feature) -> None:
-        a = [i for i in feature]
+    def drop_feature(this, *feature) -> object:
+        '''i for i in feature:
+            this.train = this.train.drop(a, axis=1)
+            this.test = this.test.drop(a, axis=1)
 
-        this.train = this.train.drop(a, axis=1)
-        this.test = this.test.drop(a, axis=1)
+            for i in [this.train, this.test]:
+                for j in feature:
+                i.drop(j, axis=1, inplace = True)
+            '''
+
+        [j.drop(list(feature), axis=1, inplace=True) for j in [this.train, this.test]]
+        #[i.drop(j, axis =1, inplace=True) for j in feature for i in [this.train, this.test] ]
 
         return this
+
+    @staticmethod
+    def kwargs_sample(**kwargs) -> None:
+        ic(type(kwargs))
+        print({''.join(f'key:{i}, val:{j}') for i, j in kwargs.items()})
 
     @staticmethod
     def create_train(this) -> object:
@@ -75,6 +87,10 @@ class TitanicModel(object):
 
     @staticmethod
     def name_nominal(this) -> object:
+        combine = [this.train, this.test] # 데이터셋에 형태를 리스트 형태로 담아 편집하려한다.
+        for datset in combine:
+            datset['Title'] = datset.Name.str.extract('([A-Za-z]+)\.',expand=False) # 정규식, 각 캐리터의 옵션 대소문자가 반드시 있어야한다.
+            ic(datset['Title'])
         return this
 
     @staticmethod
