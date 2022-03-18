@@ -49,7 +49,6 @@ class TitanicTemplate(object):
         model = Model()
         plt.savefig(f'{model.get_sname()}draw_survived.png')
 
-
     @staticmethod
     def draw_pclass(this) -> None:
         this['생존결과'] = this['Survived'] \
@@ -58,6 +57,7 @@ class TitanicTemplate(object):
         sns.countplot(data=this)
         model = Model()
         plt.savefig(f'{model.get_sname()}draw_pclass.png')
+
     @staticmethod
     def draw_sex(this) -> None:
         f, ax = plt.subplots(1, 2, figsize=(18, 8))
