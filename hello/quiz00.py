@@ -175,8 +175,16 @@ class Quiz00:
 
 
     def quiz09gugudan(self):  # 책받침구구단
+        for i in range(2, 10 , 4):
+            for j in range(1,10):
+                for k in range(i,i+4):
+                    print(f'{k} x {j} = {k*j}\t', end='')
+                print('\n', end='')
+            print('\n')
 
-        pass
+
+
+
 
 
 '''

@@ -182,7 +182,7 @@ class TitanicModel(object):
         labels = ['4등급', '3등급', '2등급', '1등급']
 
         this.test['Fare'] = this.test['Fare'].fillna(1)
-        this.train['Fare'] = this.train['Fare'].fillna(1)
+
         for these in [this.train, this.test]:
             these['FareBand'] = pd.cut(these['Fare'], bins, labels=labels)
             these['FareBand'] = these['FareBand'].map(fare_mapping)
