@@ -125,7 +125,6 @@ class Quiz20:
         print(a)
         return a
 
-
     @staticmethod
     def find(soup, cls_name) -> []:
 

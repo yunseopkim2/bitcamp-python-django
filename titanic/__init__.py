@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     while 1:
 
-        menu = input('1.전처리 2. 템플릿')
+        menu = input('1.전처리 2.템플릿')
         if menu == '1':
             ic(' #### 1.전처리 #### ')
             # view.preprocess('train.csv','test.csv')
@@ -22,7 +22,9 @@ if __name__ == '__main__':
         elif menu == '2':
             print('### 2.템플릿 ###')
             model = TitanicModel()
-            model.preprocess(train_fname='train.csv', test_fname='test.csv')
+            model.learning(train_fname='train.csv', test_fname='test.csv')
             break
+
         else:
+
             break
