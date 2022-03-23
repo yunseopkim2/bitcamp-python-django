@@ -194,7 +194,8 @@ class TitanicModel(object):
 
         for these in [this.train, this.test]:
             these['FareBand'] = these['Fare'].fillna(1)
-            these['FareBand'] = pd.qcut(these['FareBand'], 4, fare_mapping)
+            these['FareBand'] = pd.cut(these['FareBand'], bins, labels=labels)
+            these['FareBand'] = these['FareBand'].map(fare_mapping)
 
         return this
 
